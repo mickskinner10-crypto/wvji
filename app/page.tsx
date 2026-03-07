@@ -1,6 +1,11 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { supabase } from './lib/supabase'
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+)
 
 export default function Home() {
   const [athletes, setAthletes] = useState([])
@@ -13,8 +18,7 @@ export default function Home() {
       .then(({ data }) => { if (data) setAthletes(data) })
   }, [])
 
-  const verifiedColor = (v: string) => v === 'Gold' ? '#f5c842' : v === 'Silver' ? '#9bb0c7' : '#c97b42'
-  const rankColor = (r: number) => r === 1 ? '#f5c842' : r === 2 ? '#9bb0c7' : r === 3 ? '#c97b42' : '#5a6470'
+  const rankColor = (r) => r === 1 ? '#f5c842' : r === 2 ? '#9bb0c7' : r === 3 ? '#c97b42' : '#5a6470'
 
   return (
     <main style={{ background: "#080a0e", minHeight: "100vh", color: "#e8edf3", fontFamily: "sans-serif", padding: "40px 24px" }}>
@@ -22,20 +26,17 @@ export default function Home() {
         <div style={{ marginBottom: "8px", color: "#3df5b0", fontSize: "12px", letterSpacing: "2px" }}>● LIVE RANKINGS</div>
         <h1 style={{ fontSize: "64px", fontWeight: "900", lineHeight: "1", marginBottom: "8px" }}>WORLD VERTICAL<br/>JUMP INDEX</h1>
         <p style={{ color: "#5a6470", marginBottom: "48px" }}>The only unified global leaderboard for verified vertical jump performance.</p>
-
         <div style={{ display: "grid", gridTemplateColumns: "50px 1fr 100px 100px 80px", gap: "8px", padding: "8px 16px", background: "#0f1318", marginBottom: "4px" }}>
           {["RANK","ATHLETE","VERTICAL","WEIGHT","VERIFIED"].map(h => (
             <div key={h} style={{ fontSize: "10px", color: "#5a6470", letterSpacing: "1px" }}>{h}</div>
           ))}
         </div>
-
         {athletes.length === 0 && (
           <div style={{ padding: "40px", textAlign: "center", color: "#5a6470", background: "#0f1318" }}>
             No athletes yet. Be the first to submit your jump.
           </div>
         )}
-
-        {athletes.map((a: any, i: number) => (
+        {athletes.map((a, i) => (
           <div key={a.id} style={{ display: "grid", gridTemplateColumns: "50px 1fr 100px 100px 80px", gap: "8px", padding: "16px", background: "#0f1318", marginBottom: "2px", borderLeft: `3px solid ${rankColor(i+1)}` }}>
             <div style={{ fontSize: "22px", fontWeight: "900", color: rankColor(i+1) }}>{i+1}</div>
             <div>
@@ -44,7 +45,7 @@ export default function Home() {
             </div>
             <div style={{ fontSize: "24px", fontWeight: "900", color: rankColor(i+1), alignSelf: "center" }}>{a.vertical}"</div>
             <div style={{ alignSelf: "center", color: "#9bb0c7", fontSize: "13px" }}>{a.weight} lb</div>
-            <div style={{ alignSelf: "center", fontSize: "10px", padding: "4px 8px", border: `1px solid ${verifiedColor(a.verified)}`, color: verifiedColor(a.verified) }}>{a.verified}</div>
+            <div style={{ alignSelf: "center", fontSize: "10px", padding: "4px 8px", border: `1px solid ${rankColor(i+1)}`, color: rankColor(i+1) }}>{a.verified}</div>
           </div>
         ))}
       </div>
