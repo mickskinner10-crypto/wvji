@@ -26,7 +26,7 @@ export default function Home() {
     <main style={{ background: "#080a0e", minHeight: "100vh", color: "#e8edf3", fontFamily: "sans-serif", padding: "40px 24px" }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         <div style={{ marginBottom: "8px", color: "#3df5b0", fontSize: "12px", letterSpacing: "2px" }}>● LIVE RANKINGS</div>
-        <h1 style={{ fontSize: "64px", fontWeight: "900", lineHeight: "1", marginBottom: "8px" }}>WORLD VERTICAL<br/>JUMP INDEX</h1>
+        <h1 style={{ fontSize: "64px", fontWeight: "900", lineHeight: "1", marginBottom: "8px" }}>VERT<br/>RANKING</h1>
         <p style={{ color: "#5a6470", marginBottom: "48px" }}>The only unified global leaderboard for verified vertical jump performance.</p>
         <div style={{ display: "grid", gridTemplateColumns: "50px 1fr 100px 100px 80px", gap: "8px", padding: "8px 16px", background: "#0f1318", marginBottom: "4px" }}>
           {["RANK","ATHLETE","VERTICAL","WEIGHT","VERIFIED"].map(h => (
