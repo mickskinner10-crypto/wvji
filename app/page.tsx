@@ -18,6 +18,8 @@ export default function Home() {
       .then(({ data }) => { if (data) setAthletes(data) })
   }, [])
 
+  console.log('URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
+
   const rankColor = (r: number) => r === 1 ? '#f5c842' : r === 2 ? '#9bb0c7' : r === 3 ? '#c97b42' : '#5a6470'
 
   return (
