@@ -51,8 +51,10 @@ export default function Submit() {
         {[
           { label: "Full Name", name: "name", placeholder: "Your full name" },
           { label: "Country", name: "country", placeholder: "e.g. 🇺🇸 USA" },
-          { label: "Vertical Jump (inches)", name: "vertical", placeholder: "e.g. 42.5" },
-          { label: "Body Weight (lbs)", name: "weight", placeholder: "e.g. 175" },
+          { label: "Height (inches)", name: "height", placeholder: "e.g. 72 (6 feet = 72 inches)" },
+{ label: "Standing Reach (inches)", name: "standing_reach", placeholder: "e.g. 90" },
+{ label: "Vertical Jump (inches)", name: "vertical", placeholder: "e.g. 42.5" },
+{ label: "Body Weight (lbs)", name: "weight", placeholder: "e.g. 175" },
         ].map(field => (
           <div key={field.name} style={{ marginBottom: "20px" }}>
             <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>{field.label}</label>
