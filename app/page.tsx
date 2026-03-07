@@ -1,0 +1,1 @@
+export default function Home() { return <main style= {{background: "#080a0e",minHeight:"100vh",color:"#e8edf3",padding:"24x"}}><h1 style={{color:"#3df5b0",fontSize:"48px"}}>WVJI World Vertical Jump Index</h1></main> }
