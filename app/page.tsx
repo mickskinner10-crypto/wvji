@@ -8,7 +8,7 @@ const supabase = createClient(
 )
 
 export default function Home() {
-  const [athletes, setAthletes] = useState([])
+  const [athletes, setAthletes] = useState<any[]>([])
 
   useEffect(() => {
     supabase
