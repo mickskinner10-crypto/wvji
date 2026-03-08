@@ -24,6 +24,8 @@ export default function Submit() {
       sport: form.sport,
       vertical: parseFloat(form.vertical),
       weight: parseFloat(form.weight),
+      height: parseFloat(form.height),
+  standing_reach: parseFloat(form.standing_reach),
       verified: 'Pending'
     }])
     setLoading(false)
