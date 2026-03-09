@@ -137,7 +137,7 @@ export default function Home() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '48px' }}>
           <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
             <div style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '2px', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #1e242c' }}>Verification Tiers</div>
-            {[['🥇 Gold — Force Plate','Lab-tested · Certified facility · Full data export','#f5c842','Gold'],['🥈 Silver — Vertec Video','Slow-motion · Vertec pole visible · 240fps+','#9bb0c7','Silver'],['🥉 Bronze — Video Proof','Clear reference height · Coach witness','#c97b42','Bronze'],['⬜ Self-Reported','Unverified · Displayed separately','#5a6470','Pending']].map(([name, proof, color, badge]) => (
+            {[['🥇 Gold — Certified','','#f5c842','Gold'],['🥈 Silver — Video Evidence','','#9bb0c7','Silver'],['⬜ Self-Reported','','#5a6470','Pending']].map(([name, proof, color, badge]) => (
               <div key={name as string} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #1e242c' }}>
                 <div>
                   <div style={{ fontSize: '12px', color: color as string }}>{name}</div>
