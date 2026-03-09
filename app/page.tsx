@@ -125,7 +125,8 @@ export default function Home() {
               </div>
             </div>
             <div style={{ fontSize: '24px', fontWeight: '900', color: rankColor(i+1), alignSelf: 'center' }}>{a.vertical}"</div>
-            <div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.weight} lb</div>
+<div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.standing_reach ? a.standing_reach + '"' : '—'}</div>
+<div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.weight} lb</div>
             <div style={{ alignSelf: 'center', ...badgeStyle(a.verified) }}>
               <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'currentColor' }}></div>
               {a.verified}
