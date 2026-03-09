@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     title: "Vert Ranking — Global Vertical Jump Leaderboard",
     description: "The world's only unified vertical jump leaderboard. Submit your jump and get ranked globally.",
   },
+  verification: {
+    google: "f27YYu8MgASzNYbId-XxvkLvHuf5XKtTvkwsoou9EA8",
+  },
 };
 
 export default function RootLayout({
