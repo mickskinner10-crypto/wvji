@@ -103,7 +103,7 @@ export default function Home() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 120px 120px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
-          {['Rank','Athlete','Vertical','Weight','Verified'].map(h => (
+          {['Rank','Athlete','Vertical','Reach','Weight','Verified'].map(h => (
             <div key={h} style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: '#5a6470' }}>{h}</div>
           ))}
         </div>
