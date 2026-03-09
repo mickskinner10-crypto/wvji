@@ -102,7 +102,7 @@ export default function Home() {
           <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 120px 120px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
           {['Rank','Athlete','Vertical','Reach','Weight','Verified'].map(h => (
             <div key={h} style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: '#5a6470' }}>{h}</div>
           ))}
@@ -115,7 +115,7 @@ export default function Home() {
         )}
 
         {athletes.map((a, i) => (
-          <div key={a.id} className="athlete-row" style={{ display: 'grid', gridTemplateColumns: '60px 1fr 120px 120px 100px', gap: '8px', padding: '14px 16px', background: '#0f1318', marginBottom: '2px', borderLeft: `3px solid ${rankColor(i+1)}`, animation: `slideIn 0.4s ease-out ${i * 0.05}s backwards` }}>
+          <div key={a.id} className="athlete-row" style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '14px 16px', background: '#0f1318', marginBottom: '2px', borderLeft: `3px solid ${rankColor(i+1)}`, animation: `slideIn 0.4s ease-out ${i * 0.05}s backwards` }}>
             <div style={{ fontSize: '22px', fontWeight: '900', color: rankColor(i+1), alignSelf: 'center' }}>{i+1}</div>
             <div style={{ alignSelf: 'center' }}>
               <div style={{ fontWeight: '500', fontSize: '15px', marginBottom: '2px' }}>{a.name}</div>
