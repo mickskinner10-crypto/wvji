@@ -127,7 +127,7 @@ const filtered = athletes.filter(a => {
           </div>
         )}
 
-        {athletes.map((a, i) => (
+        {filtered.map((a, i) => (
           <div key={a.id} className="athlete-row" style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '14px 16px', background: '#0f1318', marginBottom: '2px', borderLeft: `3px solid ${rankColor(i+1)}`, animation: `slideIn 0.4s ease-out ${i * 0.05}s backwards` }}>
             <div style={{ fontSize: '22px', fontWeight: '900', color: rankColor(i+1), alignSelf: 'center' }}>{i+1}</div>
             <div style={{ alignSelf: 'center' }}>
