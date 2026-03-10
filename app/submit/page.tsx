@@ -57,6 +57,8 @@ export default function Submit() {
 { label: "Standing Reach (inches)", name: "standing_reach", placeholder: "e.g. 90" },
 { label: "Vertical Jump (inches)", name: "vertical", placeholder: "e.g. 42.5" },
 { label: "Body Weight (lbs)", name: "weight", placeholder: "e.g. 175" },
+      { label: "State / Province (optional)", name: "state", placeholder: "e.g. California" },
+{ label: "Video Link (required if 40\" or above)", name: "video_url", placeholder: "YouTube or Instagram link" },
         ].map(field => (
           <div key={field.name} style={{ marginBottom: "20px" }}>
             <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>{field.label}</label>
