@@ -23,17 +23,17 @@ export default function Submit() {
     }
     setLoading(true)
     await supabase.from('athletes').insert([{
-      name: form.name,
-      country: form.country,
-      sport: form.sport,
-      vertical: parseFloat(form.vertical),
-      weight: parseFloat(form.weight),
-      height: parseFloat(form.height),
-  standing_reach: parseFloat(form.standing_reach),
-      state: form.state,
-video_url: form.video_url,
-      verified: 'Pending'
-    }])
+  name: form.name,
+  country: form.country,
+  sport: form.sport,
+  vertical: parseFloat(form.vertical),
+  weight: form.weight ? parseFloat(form.weight) : null,
+  height: form.height ? parseFloat(form.height) : null,
+  standing_reach: form.standing_reach ? parseFloat(form.standing_reach) : null,
+  state: form.state || null,
+  video_url: form.video_url || null,
+  verified: 'Pending'
+}])
     setLoading(false)
     setSubmitted(true)
   }
