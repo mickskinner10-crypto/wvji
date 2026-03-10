@@ -8,7 +8,7 @@ const supabase = createClient(
 )
 
 export default function Submit() {
-  const [form, setForm] = useState({ name: '', country: '', sport: '', vertical: '', weight: '', height: '', standing_reach: '' })
+  const [form, setForm] = useState({ name: '', country: '', sport: '', vertical: '', weight: '', height: '', standing_reach: '', state: '', video_url: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
