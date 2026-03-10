@@ -9,7 +9,14 @@ const supabase = createClient(
 
 export default function Home() {
   const [athletes, setAthletes] = useState<any[]>([])
+const [countryFilter, setCountryFilter] = useState('All')
+const [sportFilter, setSportFilter] = useState('All Sports')
 
+const filtered = athletes.filter(a => {
+  const countryMatch = countryFilter === 'All' || a.country?.includes(countryFilter)
+  const sportMatch = sportFilter === 'All Sports' || a.sport === sportFilter
+  return countryMatch && sportMatch
+})
   useEffect(() => {
     supabase
       .from('athletes')
