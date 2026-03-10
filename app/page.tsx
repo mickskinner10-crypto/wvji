@@ -53,7 +53,7 @@ const filtered = athletes.filter(a => {
       <header style={{ borderBottom: '1px solid #1e242c', padding: '20px 24px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ fontFamily: 'serif', fontSize: '24px', fontWeight: '900', letterSpacing: '3px' }}>
-            VERT<span style={{ color: '#3df5b0' }}>·</span>RANKING
+            <img src="/logo.png" alt="Vert Ranking" style={{ height: '48px', width: 'auto' }} />
           </div>
           <div style={{ display: 'flex', gap: '28px', alignItems: 'center' }}>
             {['Rankings', 'Categories', 'Verification'].map(l => (
