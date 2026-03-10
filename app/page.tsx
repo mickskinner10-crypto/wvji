@@ -77,7 +77,12 @@ const filtered = athletes.filter(a => {
             The only unified global leaderboard for verified vertical jump performance. Gold standard for dunkers, ballers, and elite athletes worldwide.
           </p>
           <div style={{ display: 'flex', marginTop: '48px', border: '1px solid #1e242c' }}>
-            {[[athletes.length.toString(), 'Athletes Ranked'], ['62', 'Countries'], ['1,203', 'Verified Jumps'], ['50"', 'World Record']].map(([num, label], i, arr) => (
+            {[
+  [athletes.length.toString(), 'Athletes Ranked'],
+  [[...new Set(athletes.map(a => a.country))].length.toString(), 'Countries'],
+  [athletes.filter(a => a.verified === 'Gold' || a.verified === 'Silver').length.toString(), 'Verified Jumps'],
+  [athletes.length > 0 ? athletes[0].vertical + '"' : '—', 'World Record']
+].map(([num, label], i, arr) => (
               <div key={label} style={{ flex: 1, padding: '18px 24px', borderRight: i < arr.length - 1 ? '1px solid #1e242c' : 'none' }}>
                 <div style={{ fontSize: '36px', fontWeight: '900', color: '#3df5b0', lineHeight: 1 }}>{num}</div>
                 <div style={{ fontSize: '10px', color: '#5a6470', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '4px' }}>{label}</div>
