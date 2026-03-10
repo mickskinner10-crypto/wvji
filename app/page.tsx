@@ -96,7 +96,7 @@ export default function Home() {
 
         <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
           <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Filter:</span>
-          {['All Athletes','Basketball','Volleyball','Track & Field','Dunkers'].map((f, i) => (
+          {['All','USA','Canada','Australia','UK','France','Nigeria','Ghana'].map((f, i) => (
             <button key={f} className={`filter-btn ${i === 0 ? 'active' : ''}`}>{f}</button>
           ))}
           <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
