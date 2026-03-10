@@ -103,8 +103,8 @@ const filtered = athletes.filter(a => {
 
         <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
           <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Country:</span>
-          {['All','USA','Canada','Australia','UK','France','Nigeria','Ghana'].map((f, i) => (
-  <button key={f} className={`filter-btn ${i === 0 ? 'active' : ''}`}>{f}</button>
+          {['All','USA','Canada','Australia','UK','France','Nigeria','Ghana'].map((f) => (
+  <button key={f} onClick={() => setCountryFilter(f)} className={`filter-btn ${countryFilter === f ? 'active' : ''}`}>{f}</button>
 ))}
 </div>
 <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
