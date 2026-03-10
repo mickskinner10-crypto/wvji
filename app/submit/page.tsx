@@ -26,6 +26,8 @@ export default function Submit() {
       weight: parseFloat(form.weight),
       height: parseFloat(form.height),
   standing_reach: parseFloat(form.standing_reach),
+      state: form.state,
+video_url: form.video_url,
       verified: 'Pending'
     }])
     setLoading(false)
