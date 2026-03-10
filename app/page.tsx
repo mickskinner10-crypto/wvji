@@ -109,9 +109,9 @@ const filtered = athletes.filter(a => {
 </div>
 <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
   <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Sport:</span>
-  {['All Sports','Basketball','Volleyball','Track & Field','Dunkers','Football'].map((f, i) => (
-    <button key={f} className={`filter-btn ${i === 0 ? 'active' : ''}`}>{f}</button>
-  ))}
+  {['All Sports','Basketball','Volleyball','Track & Field','Dunkers','Football'].map((f) => (
+  <button key={f} onClick={() => setSportFilter(f)} className={`filter-btn ${sportFilter === f ? 'active' : ''}`}>{f}</button>
+))}
           <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
         </div>
 
