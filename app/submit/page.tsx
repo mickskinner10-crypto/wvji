@@ -85,7 +85,11 @@ video_url: form.video_url,
             <option>Other</option>
           </select>
         </div>
-
+{parseFloat(form.vertical) >= 40 && !form.video_url && (
+  <div style={{ background: 'rgba(245,200,66,0.1)', border: '1px solid #f5c842', color: '#f5c842', padding: '12px 16px', fontSize: '13px', marginBottom: '16px' }}>
+    ⚠️ Jumps of 40" or above require a video link for review.
+  </div>
+)}
         <button onClick={submit} disabled={loading} style={{ width: "100%", background: "#3df5b0", color: "#000", border: "none", padding: "16px", fontSize: "15px", fontWeight: "700", cursor: "pointer", letterSpacing: "1px", textTransform: "uppercase" }}>
           {loading ? "Submitting..." : "Submit Jump →"}
         </button>
