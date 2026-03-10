@@ -17,6 +17,10 @@ export default function Submit() {
   }
 
   const submit = async () => {
+    if (parseFloat(form.vertical) >= 40 && !form.video_url) {
+      alert('Please provide a video link for jumps of 40" or above.')
+      return
+    }
     setLoading(true)
     await supabase.from('athletes').insert([{
       name: form.name,
