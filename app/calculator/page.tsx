@@ -91,7 +91,7 @@ export default function Calculator() {
                   ['Standing Reach', formatInches(reachInches)],
                   ['+ Vertical Jump', `+ ${verticalInches}"`],
                   ['= Max Touch', formatInches(maxTouch)],
-                  ['Dunk Threshold (10'6")', `10'6" (126")`],
+                  ['Dunk Threshold (10ft 6in)', '10ft 6in (126in)'],
                 ].map(([label, value]) => (
                   <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
                     <span style={{ color: '#5a6470' }}>{label}</span>
