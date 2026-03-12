@@ -11,7 +11,7 @@ export default function Calculator() {
   const verticalInches = parseFloat(vertical)
 
   const maxTouch = reachInches && verticalInches ? (reachInches + verticalInches) : null
-  const rimHeight = 120 // 10 feet in inches
+  const rimHeight = 126 // 10 feet + 6 inches to actually palm and dunk
   const canDunk = maxTouch ? maxTouch >= rimHeight : null
 
   const formatInches = (inches: number) => {
@@ -91,7 +91,7 @@ export default function Calculator() {
                   ['Standing Reach', formatInches(reachInches)],
                   ['+ Vertical Jump', `+ ${verticalInches}"`],
                   ['= Max Touch', formatInches(maxTouch)],
-                  ['NBA Rim Height', `10'0" (120")`],
+                  ['Dunk Threshold (10'6")', `10'6" (126")`],
                 ].map(([label, value]) => (
                   <div key={label} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
                     <span style={{ color: '#5a6470' }}>{label}</span>
