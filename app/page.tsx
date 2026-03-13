@@ -8,7 +8,7 @@ const supabase = createClient(
 )
 
 export default function Home() {
-  const [athletes, setAthletes] = useState<any[]>([])
+  const [athletes, setAthletes] = useState<any[]>([]) const [user, setUser] = useState<any>(null)
 const [countryFilter, setCountryFilter] = useState('All')
 const [sportFilter, setSportFilter] = useState('All Sports')
 
@@ -18,11 +18,8 @@ const filtered = athletes.filter(a => {
   return countryMatch && sportMatch
 })
   useEffect(() => {
-    supabase
-      .from('athletes')
-      .select('*')
-      .order('vertical', { ascending: false })
-      .then(({ data }) => { if (data) setAthletes(data) })
+    supabase.from('athletes').select('*').order('vertical', { ascending: false }).then(({ data }) => { if (data) setAthletes(data) })
+    supabase.auth.getUser().then(({ data }) => { if (data.user) setUser(data.user) })
   }, [])
 
   const rankColor = (r: number) => r === 1 ? '#f5c842' : r === 2 ? '#9bb0c7' : r === 3 ? '#c97b42' : '#5a6470'
@@ -59,7 +56,14 @@ const filtered = athletes.filter(a => {
             {[['Rankings', '/'], ['Calculator', '/calculator'], ['Verification', '#']].map(([label, href]) => (
   <a key={label} href={href} style={{ color: '#5a6470', textDecoration: 'none', fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{label}</a>
 ))}
-            <a href="/submit" style={{ background: '#3df5b0', color: '#000', padding: '9px 20px', fontSize: '12px', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none' }}>+ Submit Jump</a>
+            {user ? (
+  <span style={{ color: '#3df5b0', fontSize: '12px', letterSpacing: '1px' }}>
+    {user.email?.split('@')[0]}
+  </span>
+) : (
+  <a href="/login" style={{ color: '#5a6470', textDecoration: 'none', fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Sign In</a>
+)}
+<a href="/submit" style={{ background: '#3df5b0', color: '#000', padding: '9px 20px', fontSize: '12px', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none' }}>+ Submit Jump</a>
           </div>
         </div>
       </header>
