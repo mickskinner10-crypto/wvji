@@ -9,6 +9,7 @@ const supabase = createClient(
 )
 
 function AthleteContent() {
+  const searchParams = useSearchParams()
   const id = searchParams.get('id')
 const [athlete, setAthlete] = useState<any>(null)
 const [rank, setRank] = useState<number | null>(null)
