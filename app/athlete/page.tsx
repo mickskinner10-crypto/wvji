@@ -143,6 +143,15 @@ const [claimed, setClaimed] = useState(false)
     </div>
     <button onClick={async () => {
       setClaiming(true)
+      const { data: existing } = await supabase
+        .from('athletes')
+        .select('id')
+        .eq('user_id', user.id)
+      if (existing && existing.length > 0) {
+        alert('You have already claimed a profile. You can only claim one.')
+        setClaiming(false)
+        return
+      }
       await supabase.from('athletes').update({ user_id: user.id }).eq('id', id)
       setClaiming(false)
       setClaimed(true)
