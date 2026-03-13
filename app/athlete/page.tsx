@@ -9,11 +9,13 @@ const supabase = createClient(
 )
 
 function AthleteContent() {
-  const searchParams = useSearchParams()
   const id = searchParams.get('id')
-  const [athlete, setAthlete] = useState<any>(null)
-  const [rank, setRank] = useState<number | null>(null)
-  const [loading, setLoading] = useState(true)
+const [athlete, setAthlete] = useState<any>(null)
+const [rank, setRank] = useState<number | null>(null)
+const [loading, setLoading] = useState(true)
+const [user, setUser] = useState<any>(null)
+const [claiming, setClaiming] = useState(false)
+const [claimed, setClaimed] = useState(false)
 
   useEffect(() => {
     if (!id) return
@@ -38,6 +40,7 @@ function AthleteContent() {
       setLoading(false)
     }
     load()
+    supabase.auth.getUser().then(({ data }) => { if (data.user) setUser(data.user) })
   }, [id])
 
   const verifiedColor = (v: string) => v === 'Gold' ? '#f5c842' : v === 'Silver' ? '#9bb0c7' : '#5a6470'
@@ -131,7 +134,34 @@ function AthleteContent() {
             </a>
           </div>
         )}
+{user && athlete && !athlete.user_id && !claimed && (
+  <div style={{ marginTop: '32px', border: '1px solid #1e242c', background: '#0f1318', padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div>
+      <div style={{ fontSize: '14px', fontWeight: '500', marginBottom: '4px' }}>Is this your profile?</div>
+      <div style={{ fontSize: '12px', color: '#5a6470' }}>Claim it to verify your jump and track your rankings.</div>
+    </div>
+    <button onClick={async () => {
+      setClaiming(true)
+      await supabase.from('athletes').update({ user_id: user.id }).eq('id', id)
+      setClaiming(false)
+      setClaimed(true)
+    }} style={{ background: '#3df5b0', color: '#000', border: 'none', padding: '10px 20px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '1px', whiteSpace: 'nowrap' as const }}>
+      {claiming ? 'Claiming...' : 'This is me →'}
+    </button>
+  </div>
+)}
 
+{claimed && (
+  <div style={{ marginTop: '32px', background: 'rgba(61,245,176,0.1)', border: '1px solid #3df5b0', color: '#3df5b0', padding: '16px 24px', fontSize: '13px' }}>
+    ✓ Profile claimed successfully!
+  </div>
+)}
+
+{athlete?.user_id && user?.id === athlete.user_id && !claimed && (
+  <div style={{ marginTop: '32px', background: 'rgba(61,245,176,0.05)', border: '1px solid #3df5b0', color: '#3df5b0', padding: '16px 24px', fontSize: '13px' }}>
+    ✓ This is your verified profile.
+  </div>
+)}
         <div style={{ marginTop: '32px', border: '1px solid #1a8a5f', background: 'rgba(61,245,176,0.03)', padding: '24px', textAlign: 'center' }}>
           <div style={{ fontSize: '15px', fontWeight: '500', marginBottom: '8px' }}>Think you can beat {athlete.name.split(' ')[0]}?</div>
           <p style={{ fontSize: '13px', color: '#5a6470', marginBottom: '16px' }}>Submit your jump and get ranked globally.</p>
