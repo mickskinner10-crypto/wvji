@@ -147,6 +147,8 @@ function AthleteContent() {
       </footer>
     </>
   )
+}
+
 export default function AthletePage() {
   return (
     <Suspense fallback={<main style={{ background: '#080a0e', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ color: '#3df5b0', fontFamily: 'sans-serif' }}>Loading...</div></main>}>
