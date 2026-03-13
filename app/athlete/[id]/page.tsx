@@ -17,7 +17,7 @@ export default function AthletePage({ params }: { params: { id: string } }) {
       const { data } = await supabase
         .from('athletes')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', parseInt(params.id))
         .single()
 
       if (data) {
