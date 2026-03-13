@@ -56,26 +56,37 @@ export default function Submit() {
         <h1 style={{ fontSize: "48px", fontWeight: "900", margin: "16px 0 8px" }}>Submit Your Jump</h1>
         <p style={{ color: "#5a6470", marginBottom: "40px" }}>Fill out the form below. All submissions are reviewed before appearing on the leaderboard.</p>
 
-        {[
-          { label: "Full Name", name: "name", placeholder: "Your full name" },
-          { label: "Country", name: "country", placeholder: "e.g. 🇺🇸 USA" },
-          { label: "Height (inches)", name: "height", placeholder: "e.g. 72 (6 feet = 72 inches)" },
-{ label: "Standing Reach (inches)", name: "standing_reach", placeholder: "e.g. 90" },
-{ label: "Vertical Jump (inches)", name: "vertical", placeholder: "e.g. 42.5" },
-{ label: "Body Weight (lbs)", name: "weight", placeholder: "e.g. 175" },
-      { label: "State / Province (optional)", name: "state", placeholder: "e.g. California" },
-{ label: "Video Link (required if 40\" or above)", name: "video_url", placeholder: "YouTube or Instagram link" },
-        ].map(field => (
-          <div key={field.name} style={{ marginBottom: "20px" }}>
-            <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>{field.label}</label>
-            <input
-              name={field.name}
-              placeholder={field.placeholder}
-              onChange={handle}
-              style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }}
-            />
-          </div>
-        ))}
+        <div style={{ marginBottom: "20px" }}>
+  <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>Full Name</label>
+  <input name="name" placeholder="Your full name" onChange={handle} style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }} />
+</div>
+
+<div style={{ marginBottom: "20px" }}>
+  <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>Country</label>
+  <select name="country" onChange={handle} style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }}>
+    <option value="">Select country</option>
+    {["USA","Canada","UK","Australia","France","Germany","Spain","Brazil","Argentina","Nigeria","Ghana","Kenya","South Africa","Japan","China","South Korea","Philippines","India","New Zealand","Mexico","Jamaica","Puerto Rico","Dominican Republic","Other"].map(c => <option key={c} value={c}>{c}</option>)}
+  </select>
+</div>
+
+{form.country === 'USA' && (
+  <div style={{ marginBottom: "20px" }}>
+    <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>State</label>
+    <select name="state" onChange={handle} style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }}>
+      <option value="">Select state</option>
+      {["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"].map(s => <option key={s} value={s}>{s}</option>)}
+    </select>
+  </div>
+)}
+
+{["height","standing_reach","vertical","weight"].map(field => (
+  <div key={field} style={{ marginBottom: "20px" }}>
+    <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>
+      {field === 'height' ? 'Height (inches)' : field === 'standing_reach' ? 'Standing Reach (inches)' : field === 'vertical' ? 'Vertical Jump (inches)' : 'Body Weight (lbs)'}
+    </label>
+    <input name={field} placeholder={field === 'height' ? 'e.g. 72 (6 feet = 72 inches)' : field === 'standing_reach' ? 'e.g. 90' : field === 'vertical' ? 'e.g. 42.5' : 'e.g. 175'} onChange={handle} style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }} />
+  </div>
+))}
 
         <div style={{ marginBottom: "20px" }}>
           <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>Sport</label>
