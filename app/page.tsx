@@ -188,22 +188,13 @@ const filtered = athletes.filter(a => {
           </div>
         </div>
 
-        <div style={{ margin: '48px 0', border: '1px solid #1a8a5f', padding: '36px', background: 'rgba(61,245,176,0.03)' }}>
-          <div style={{ fontSize: '32px', fontWeight: '900', letterSpacing: '2px', marginBottom: '8px' }}>Submit Your Jump</div>
-          <p style={{ fontSize: '13px', color: '#5a6470', marginBottom: '24px' }}>Have a verified vertical? Get on the global leaderboard in 3 steps.</p>
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' as const }}>
-            {[['01','Record Your Jump','Film in slow-motion (240fps+) against a Vertec or measured wall. Standing reach required.'],['02','Choose Verification','Self-upload for Bronze. Book a certified facility for Gold. We review within 48h.'],['03','Get Ranked','Your verified result goes live on the global leaderboard with your athlete profile.']].map(([num, title, desc]) => (
-              <div key={num} style={{ display: 'flex', gap: '12px', flex: 1, minWidth: '180px' }}>
-                <div style={{ fontSize: '28px', fontWeight: '900', color: '#3df5b0', lineHeight: 1 }}>{num}</div>
-                <div>
-                  <div style={{ fontSize: '13px', fontWeight: '500', marginBottom: '2px' }}>{title}</div>
-                  <div style={{ fontSize: '12px', color: '#5a6470', lineHeight: '1.6' }}>{desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <a href="/submit" style={{ display: 'inline-block', marginTop: '28px', background: '#3df5b0', color: '#000', padding: '12px 32px', fontSize: '13px', fontWeight: '700', textDecoration: 'none', letterSpacing: '1px', textTransform: 'uppercase' }}>Submit My Jump →</a>
-        </div>
+        <div style={{ margin: '48px 0', border: '1px solid #1a8a5f', padding: '36px', background: 'rgba(61,245,176,0.03)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' as const, gap: '24px' }}>
+  <div>
+    <div style={{ fontSize: '28px', fontWeight: '900', marginBottom: '8px' }}>Think you can jump?</div>
+    <p style={{ fontSize: '14px', color: '#5a6470', maxWidth: '480px' }}>Submit your vertical and see where you stack up against athletes worldwide. No gatekeeping — just show us the numbers.</p>
+  </div>
+  <a href="/submit" style={{ display: 'inline-block', background: '#3df5b0', color: '#000', padding: '14px 36px', fontSize: '14px', fontWeight: '700', textDecoration: 'none', letterSpacing: '1px', textTransform: 'uppercase', whiteSpace: 'nowrap' as const }}>Submit My Jump →</a>
+</div>
 
       </main>
 
