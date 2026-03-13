@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { createClient } from '@supabase/supabase-js'
 
@@ -8,7 +8,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
-export default function AthletePage() {
+function AthleteContent() {
   const searchParams = useSearchParams()
   const id = searchParams.get('id')
   const [athlete, setAthlete] = useState<any>(null)
@@ -146,5 +146,11 @@ export default function AthletePage() {
         </div>
       </footer>
     </>
+  )
+export default function AthletePage() {
+  return (
+    <Suspense fallback={<main style={{ background: '#080a0e', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ color: '#3df5b0', fontFamily: 'sans-serif' }}>Loading...</div></main>}>
+      <AthleteContent />
+    </Suspense>
   )
 }
