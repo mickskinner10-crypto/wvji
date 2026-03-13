@@ -22,6 +22,7 @@ export default function AthletePage({ params }: any) {
         .eq('id', id)
         .single()
 
+      console.log('id:', id, 'data:', data)
       if (data) {
         setAthlete(data)
         const { data: all } = await supabase
