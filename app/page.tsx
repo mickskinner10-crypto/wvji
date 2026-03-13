@@ -56,9 +56,9 @@ const filtered = athletes.filter(a => {
             <img src="/logo.png" alt="Vert Ranking" style={{ height: '72px', width: 'auto' }} />
           </div>
           <div style={{ display: 'flex', gap: '28px', alignItems: 'center' }}>
-            {['Rankings', 'Categories', 'Verification'].map(l => (
-              <a key={l} href="#" style={{ color: '#5a6470', textDecoration: 'none', fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{l}</a>
-            ))}
+            {[['Rankings', '/'], ['Calculator', '/calculator'], ['Verification', '#']].map(([label, href]) => (
+  <a key={label} href={href} style={{ color: '#5a6470', textDecoration: 'none', fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{label}</a>
+))}
             <a href="/submit" style={{ background: '#3df5b0', color: '#000', padding: '9px 20px', fontSize: '12px', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none' }}>+ Submit Jump</a>
           </div>
         </div>
