@@ -11,13 +11,15 @@ export default function AthletePage({ params }: any) {
   const [athlete, setAthlete] = useState<any>(null)
   const [rank, setRank] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
+  const id = params?.id
 
   useEffect(() => {
+    if (!id) return
     const load = async () => {
       const { data } = await supabase
         .from('athletes')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', id)
         .single()
 
       if (data) {
@@ -34,7 +36,7 @@ export default function AthletePage({ params }: any) {
       setLoading(false)
     }
     load()
-  }, [params.id])
+  }, [id])
 
   const verifiedColor = (v: string) => v === 'Gold' ? '#f5c842' : v === 'Silver' ? '#9bb0c7' : '#5a6470'
   const rankColor = (r: number) => r === 1 ? '#f5c842' : r === 2 ? '#9bb0c7' : r === 3 ? '#c97b42' : '#3df5b0'
