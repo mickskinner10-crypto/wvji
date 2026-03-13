@@ -7,7 +7,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
-export default function AthletePage({ params }: { params: { id: string } }) {
+export default function AthletePage({ params }: any) {
   const [athlete, setAthlete] = useState<any>(null)
   const [rank, setRank] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
@@ -17,7 +17,7 @@ export default function AthletePage({ params }: { params: { id: string } }) {
       const { data } = await supabase
         .from('athletes')
         .select('*')
-        .eq('id', parseInt(params.id))
+        .eq('id', params.id)
         .single()
 
       if (data) {
