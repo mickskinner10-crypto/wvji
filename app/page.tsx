@@ -8,7 +8,8 @@ const supabase = createClient(
 )
 
 export default function Home() {
-  const [athletes, setAthletes] = useState<any[]>([]) const [user, setUser] = useState<any>(null)
+  const [athletes, setAthletes] = useState<any[]>([]) 
+  const [user, setUser] = useState<any>(null)
 const [countryFilter, setCountryFilter] = useState('All')
 const [sportFilter, setSportFilter] = useState('All Sports')
 
