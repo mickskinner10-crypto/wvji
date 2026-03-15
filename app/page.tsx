@@ -170,7 +170,7 @@ const filtered = athletes
   {category === 'Pound-for-Pound' ? a.displayValue : `${a.vertical}"`}
   {category === 'Pound-for-Pound' && <span style={{ fontSize: '11px', color: '#5a6470', display: 'block' }}>vert/lb</span>}
 </div>
-<div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.height ? a.height + '"' : '—'}</div>
+<div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.height ? `${Math.floor(parseFloat(a.height)/12)}'${Math.round(parseFloat(a.height)%12)}"` : '—'}</div>
 <div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.weight} lb</div>
             <div style={{ alignSelf: 'center', ...badgeStyle(a.verified) }}>
               <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'currentColor' }}></div>
