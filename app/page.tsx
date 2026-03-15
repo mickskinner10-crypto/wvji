@@ -145,7 +145,7 @@ const filtered = athletes
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
-          {['Rank','Athlete', category === 'Pound-for-Pound' ? 'V/Weight' : 'Vertical','Reach','Weight','Verified'].map(h => (
+          {['Rank','Athlete', category === 'Pound-for-Pound' ? 'V/Weight' : 'Vertical','Height','Weight','Verified'].map(h => (
             <div key={h} style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: '#5a6470' }}>{h}</div>
           ))}
         </div>
@@ -170,7 +170,7 @@ const filtered = athletes
   {category === 'Pound-for-Pound' ? a.displayValue : `${a.vertical}"`}
   {category === 'Pound-for-Pound' && <span style={{ fontSize: '11px', color: '#5a6470', display: 'block' }}>vert/lb</span>}
 </div>
-<div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.standing_reach ? a.standing_reach + '"' : '—'}</div>
+<div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.height ? a.height + '"' : '—'}</div>
 <div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.weight} lb</div>
             <div style={{ alignSelf: 'center', ...badgeStyle(a.verified) }}>
               <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'currentColor' }}></div>
