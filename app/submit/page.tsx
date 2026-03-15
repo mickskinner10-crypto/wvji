@@ -16,7 +16,23 @@ export default function Submit() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const submit = async () => {
+ const submit = async () => {
+    if (!form.name.trim()) {
+      alert('Please enter your name.')
+      return
+    }
+    if (!form.vertical || isNaN(parseFloat(form.vertical))) {
+      alert('Please enter your vertical jump measurement.')
+      return
+    }
+    if (!form.country) {
+      alert('Please select your country.')
+      return
+    }
+    if (!form.sport) {
+      alert('Please select your sport.')
+      return
+    }
     if (parseFloat(form.vertical) >= 40 && !form.video_url) {
       alert('Please provide a video link for jumps of 40" or above.')
       return
