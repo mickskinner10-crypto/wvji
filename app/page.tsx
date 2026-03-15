@@ -12,12 +12,31 @@ export default function Home() {
   const [user, setUser] = useState<any>(null)
 const [countryFilter, setCountryFilter] = useState('All')
 const [sportFilter, setSportFilter] = useState('All Sports')
+  const [category, setCategory] = useState('Overall')
 
-const filtered = athletes.filter(a => {
-  const countryMatch = countryFilter === 'All' || a.country?.includes(countryFilter)
-  const sportMatch = sportFilter === 'All Sports' || a.sport === sportFilter
-  return countryMatch && sportMatch
-})
+const filtered = athletes
+  .filter(a => {
+    const countryMatch = countryFilter === 'All' || a.country?.includes(countryFilter)
+    const sportMatch = sportFilter === 'All Sports' || a.sport === sportFilter
+    return countryMatch && sportMatch
+  })
+  .map(a => ({
+    ...a,
+    displayValue: category === 'Pound-for-Pound' && a.weight
+      ? (parseFloat(a.vertical) / parseFloat(a.weight)).toFixed(3)
+      : a.vertical,
+    ppw: category === 'Pound-for-Pound' && a.weight
+      ? parseFloat(a.vertical) / parseFloat(a.weight)
+      : null
+  }))
+  .sort((a, b) => {
+    if (category === 'Pound-for-Pound') {
+      if (!a.ppw) return 1
+      if (!b.ppw) return -1
+      return b.ppw - a.ppw
+    }
+    return parseFloat(b.vertical) - parseFloat(a.vertical)
+  })
   useEffect(() => {
     supabase.from('athletes').select('*').order('vertical', { ascending: false }).then(({ data }) => { if (data) setAthletes(data) })
     supabase.auth.getUser().then(({ data }) => { if (data.user) setUser(data.user) })
@@ -97,8 +116,8 @@ const filtered = athletes.filter(a => {
         </section>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px', margin: '0 0 36px' }}>
-          {[['⚡','Overall','Raw vertical — the highest measured leap in the world'],['⚖️','Pound-for-Pound','Vertical relative to bodyweight — true explosive power'],['🏋️','Weight Classes','Compete within your weight division, like combat sports'],['🦶','Standing Vert','No approach — pure lower body power from standstill']].map(([icon, title, desc], i) => (
-            <div key={title} className={`cat-card ${i === 0 ? 'active' : ''}`}>
+          {[['⚡','Overall','Raw vertical — the highest measured leap in the world'],['⚖️','Pound-for-Pound','Vertical relative to bodyweight — true explosive power'],['🏋️','Weight Classes','Compete within your weight division, like combat sports'],['🦶','Standing Vert','No approach — pure lower body power from standstill']].map(([icon, title, desc]) => (
+            <div key={title} onClick={() => setCategory(title as string)} className={`cat-card ${category === title ? 'active' : ''}`}>
               <div style={{ fontSize: '22px', marginBottom: '10px' }}>{icon}</div>
               <div style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '1.5px', marginBottom: '4px' }}>{title}</div>
               <div style={{ fontSize: '11px', color: '#5a6470', lineHeight: '1.5' }}>{desc}</div>
@@ -126,7 +145,7 @@ const filtered = athletes.filter(a => {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
-          {['Rank','Athlete','Vertical','Reach','Weight','Verified'].map(h => (
+          {['Rank','Athlete', category === 'Pound-for-Pound' ? 'V/Weight' : 'Vertical','Reach','Weight','Verified'].map(h => (
             <div key={h} style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: '#5a6470' }}>{h}</div>
           ))}
         </div>
@@ -147,7 +166,10 @@ const filtered = athletes.filter(a => {
                 <div style={{ height: '100%', background: rankColor(i+1), width: `${Math.round((a.vertical / (athletes[0]?.vertical || 1)) * 100)}%` }}></div>
               </div>
             </div>
-            <div style={{ fontSize: '24px', fontWeight: '900', color: rankColor(i+1), alignSelf: 'center' }}>{a.vertical}"</div>
+            <div style={{ fontSize: '24px', fontWeight: '900', color: rankColor(i+1), alignSelf: 'center' }}>
+  {category === 'Pound-for-Pound' ? a.displayValue : `${a.vertical}"`}
+  {category === 'Pound-for-Pound' && <span style={{ fontSize: '11px', color: '#5a6470', display: 'block' }}>vert/lb</span>}
+</div>
 <div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.standing_reach ? a.standing_reach + '"' : '—'}</div>
 <div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.weight} lb</div>
             <div style={{ alignSelf: 'center', ...badgeStyle(a.verified) }}>
