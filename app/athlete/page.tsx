@@ -188,6 +188,14 @@ const [saving, setSaving] = useState(false)
         ))}
         <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
           <button onClick={async () => {
+            if (parseFloat(editForm.vertical) >= 40 && !athlete.video_url) {
+              alert('A video link is required for verticals of 40" or above. Please submit a new jump with a video link.')
+              return
+            }
+            if (parseFloat(editForm.vertical) > parseFloat(athlete.vertical) && parseFloat(editForm.vertical) >= 40 && !athlete.video_url) {
+              alert('You must provide a video to increase your vertical to 40" or above.')
+              return
+            }
             setSaving(true)
             await supabase.from('athletes').update({
               height: editForm.height ? parseFloat(editForm.height) : null,
