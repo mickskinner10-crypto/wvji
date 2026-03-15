@@ -181,15 +181,18 @@ const [editVideo, setEditVideo] = useState('')
     ) : (
       <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
         <div style={{ fontSize: '14px', fontWeight: '700', marginBottom: '20px' }}>Edit Your Stats</div>
-        {[['Height (inches)', 'height'], ['Standing Reach (inches)', 'standing_reach'], ['Vertical Jump (inches)', 'vertical'], ['Body Weight (lbs)', 'weight']].map(([label, key]) => ( <div style={{ marginBottom: '16px' }}>
-  <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#5a6470', marginBottom: '6px' }}>Video URL</label>
-  <input value={editVideo} onChange={e => setEditVideo(e.target.value)} placeholder="https://youtube.com/..." style={{ width: '100%', background: '#080a0e', border: '1px solid #1e242c', color: '#e8edf3', padding: '10px 14px', fontSize: '14px', outline: 'none' }} />
-</div>
+        {[['Height (inches)', 'height'], ['Standing Reach (inches)', 'standing_reach'], ['Vertical Jump (inches)', 'vertical'], ['Body Weight (lbs)', 'weight']].map(([label, key]) => (
           <div key={key} style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#5a6470', marginBottom: '6px' }}>{label}</label>
             <input value={editForm[key] || ''} onChange={e => setEditForm({ ...editForm, [key]: e.target.value })} style={{ width: '100%', background: '#080a0e', border: '1px solid #1e242c', color: '#e8edf3', padding: '10px 14px', fontSize: '14px', outline: 'none' }} />
           </div>
         ))}
+        ))}
+        <div style={{ marginBottom: '16px' }}>
+          <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#5a6470', marginBottom: '6px' }}>Video URL</label>
+          <input value={editVideo} onChange={e => setEditVideo(e.target.value)} placeholder="https://youtube.com/..." style={{ width: '100%', background: '#080a0e', border: '1px solid #1e242c', color: '#e8edf3', padding: '10px 14px', fontSize: '14px', outline: 'none' }} />
+        </div>
+        <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
         <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
           <button onClick={async () => {
             const newVert = parseFloat(editForm.vertical)
