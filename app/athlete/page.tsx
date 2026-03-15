@@ -17,6 +17,9 @@ const [loading, setLoading] = useState(true)
 const [user, setUser] = useState<any>(null)
 const [claiming, setClaiming] = useState(false)
 const [claimed, setClaimed] = useState(false)
+const [editing, setEditing] = useState(false)
+const [editForm, setEditForm] = useState<any>({})
+const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     if (!id) return
@@ -168,8 +171,40 @@ const [claimed, setClaimed] = useState(false)
 )}
 
 {athlete?.user_id && user?.id === athlete.user_id && !claimed && (
-  <div style={{ marginTop: '32px', background: 'rgba(61,245,176,0.05)', border: '1px solid #3df5b0', color: '#3df5b0', padding: '16px 24px', fontSize: '13px' }}>
-    ✓ This is your verified profile.
+  <div style={{ marginTop: '32px' }}>
+    {!editing ? (
+      <div style={{ background: 'rgba(61,245,176,0.05)', border: '1px solid #3df5b0', color: '#3df5b0', padding: '16px 24px', fontSize: '13px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span>✓ This is your verified profile.</span>
+        <button onClick={() => { setEditing(true); setEditForm({ height: athlete.height, standing_reach: athlete.standing_reach, vertical: athlete.vertical, weight: athlete.weight, state: athlete.state }) }} style={{ background: 'none', border: '1px solid #3df5b0', color: '#3df5b0', padding: '6px 14px', fontSize: '11px', cursor: 'pointer', letterSpacing: '1px', textTransform: 'uppercase' }}>Edit Stats</button>
+      </div>
+    ) : (
+      <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
+        <div style={{ fontSize: '14px', fontWeight: '700', marginBottom: '20px' }}>Edit Your Stats</div>
+        {[['Height (inches)', 'height'], ['Standing Reach (inches)', 'standing_reach'], ['Vertical Jump (inches)', 'vertical'], ['Body Weight (lbs)', 'weight']].map(([label, key]) => (
+          <div key={key} style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#5a6470', marginBottom: '6px' }}>{label}</label>
+            <input value={editForm[key] || ''} onChange={e => setEditForm({ ...editForm, [key]: e.target.value })} style={{ width: '100%', background: '#080a0e', border: '1px solid #1e242c', color: '#e8edf3', padding: '10px 14px', fontSize: '14px', outline: 'none' }} />
+          </div>
+        ))}
+        <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+          <button onClick={async () => {
+            setSaving(true)
+            await supabase.from('athletes').update({
+              height: editForm.height ? parseFloat(editForm.height) : null,
+              standing_reach: editForm.standing_reach ? parseFloat(editForm.standing_reach) : null,
+              vertical: editForm.vertical ? parseFloat(editForm.vertical) : null,
+              weight: editForm.weight ? parseFloat(editForm.weight) : null,
+            }).eq('id', id)
+            setAthlete({ ...athlete, ...editForm })
+            setSaving(false)
+            setEditing(false)
+          }} style={{ background: '#3df5b0', color: '#000', border: 'none', padding: '10px 24px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            {saving ? 'Saving...' : 'Save Changes'}
+          </button>
+          <button onClick={() => setEditing(false)} style={{ background: 'none', border: '1px solid #1e242c', color: '#5a6470', padding: '10px 24px', fontSize: '13px', cursor: 'pointer' }}>Cancel</button>
+        </div>
+      </div>
+    )}
   </div>
 )}
         <div style={{ marginTop: '32px', border: '1px solid #1a8a5f', background: 'rgba(61,245,176,0.03)', padding: '24px', textAlign: 'center' }}>
