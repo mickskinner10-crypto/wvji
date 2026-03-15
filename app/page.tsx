@@ -201,7 +201,11 @@ const filtered = athletes.filter(a => {
       <footer style={{ borderTop: '1px solid #1e242c', padding: '24px', marginTop: '48px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '3px', color: '#5a6470' }}>VERT RANKING</div>
-          <div style={{ fontSize: '11px', color: '#5a6470' }}>vertranking.com · Est. 2026 · All jumps verified under Vert Ranking standards</div>
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+  <span style={{ fontSize: '11px', color: '#5a6470' }}>vertranking.com · Est. 2026</span>
+  <a href="/privacy" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>Privacy Policy</a>
+  <a href="/terms" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>Terms of Service</a>
+</div>
         </div>
       </footer>
     </>
