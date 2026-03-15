@@ -57,7 +57,7 @@ const [saving, setSaving] = useState(false)
   }
 
   const maxTouch = athlete?.standing_reach && athlete?.vertical
-    ? athlete.standing_reach + athlete.vertical
+    ? parseFloat(athlete.standing_reach) + parseFloat(athlete.vertical)
     : null
 
   if (loading) return (
