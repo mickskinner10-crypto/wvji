@@ -25,10 +25,10 @@ const filtered = athletes
   .map(a => ({
     ...a,
     displayValue: category === 'Pound-for-Pound' && a.weight
-      ? (parseFloat(a.vertical) / parseFloat(a.weight)).toFixed(3)
+      ? (parseFloat(a.vertical) * (parseFloat(a.weight) / 200)).toFixed(1)
       : a.vertical,
     ppw: category === 'Pound-for-Pound' && a.weight
-      ? parseFloat(a.vertical) / parseFloat(a.weight)
+      ? parseFloat(a.vertical) * (parseFloat(a.weight) / 200)
       : null
   }))
   .sort((a, b) => {
