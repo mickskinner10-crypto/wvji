@@ -145,18 +145,7 @@ const filtered = athletes
 ))}
           <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
         </div>
-        {['All Sports','Basketball','Volleyball','Track & Field','Dunker','Football'].map((f) => (
-  <button key={f} onClick={() => setSportFilter(f)} className={`filter-btn ${sportFilter === f ? 'active' : ''}`}>{f}</button>
-))}
-          <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
-        </div>
-
-{['All Sports','Basketball','Volleyball','Track & Field','Dunker','Football'].map((f) => (
-  <button key={f} onClick={() => setSportFilter(f)} className={`filter-btn ${sportFilter === f ? 'active' : ''}`}>{f}</button>
-))}
-          <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
-        </div>
-
+        
         {countryFilter === 'USA' && (
   <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
     <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>State:</span>
