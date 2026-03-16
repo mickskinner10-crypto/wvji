@@ -13,12 +13,14 @@ export default function Home() {
 const [countryFilter, setCountryFilter] = useState('All')
 const [sportFilter, setSportFilter] = useState('All Sports')
   const [category, setCategory] = useState('Overall')
+  const [stateFilter, setStateFilter] = useState('All')
 
 const filtered = athletes
   .filter(a => {
     const countryMatch = countryFilter === 'All' || a.country?.includes(countryFilter)
     const sportMatch = sportFilter === 'All Sports' || a.sport === sportFilter
-    return countryMatch && sportMatch
+    const stateMatch = stateFilter === 'All' || a.state === stateFilter
+    return countryMatch && sportMatch && stateMatch
   })
   .map(a => ({
     ...a,
@@ -133,7 +135,7 @@ const filtered = athletes
         <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
           <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Country:</span>
           {['All','USA','Canada','Australia','UK','France','Nigeria','Ghana'].map((f) => (
-  <button key={f} onClick={() => setCountryFilter(f)} className={`filter-btn ${countryFilter === f ? 'active' : ''}`}>{f}</button>
+  <button key={f} onClick={() => { setCountryFilter(f); setStateFilter('All') }} className={`filter-btn ${countryFilter === f ? 'active' : ''}`}>{f}</button>
 ))}
 </div>
 <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
@@ -143,6 +145,27 @@ const filtered = athletes
 ))}
           <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
         </div>
+        {['All Sports','Basketball','Volleyball','Track & Field','Dunker','Football'].map((f) => (
+  <button key={f} onClick={() => setSportFilter(f)} className={`filter-btn ${sportFilter === f ? 'active' : ''}`}>{f}</button>
+))}
+          <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
+        </div>
+
+{['All Sports','Basketball','Volleyball','Track & Field','Dunker','Football'].map((f) => (
+  <button key={f} onClick={() => setSportFilter(f)} className={`filter-btn ${sportFilter === f ? 'active' : ''}`}>{f}</button>
+))}
+          <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
+        </div>
+
+{countryFilter === 'USA' && (
+  <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
+    <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>State:</span>
+    <button onClick={() => setStateFilter('All')} className={`filter-btn ${stateFilter === 'All' ? 'active' : ''}`}>All</button>
+    {[...new Set(athletes.filter(a => a.country === 'USA' && a.state).map(a => a.state))].sort().map((s: any) => (
+      <button key={s} onClick={() => setStateFilter(s)} className={`filter-btn ${stateFilter === s ? 'active' : ''}`}>{s}</button>
+    ))}
+  </div>
+)}
 
         <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
           {['Rank','Athlete', category === 'Pound-for-Pound' ? 'V/Weight' : 'Vertical','Height','Weight','Verified'].map(h => (
