@@ -28,13 +28,13 @@ export default function Privacy() {
         <p>Your name, country, sport, and vertical jump measurement are displayed publicly on the leaderboard. If you do not want this information public, do not submit a jump.</p>
 
         <h2>Data deletion</h2>
-        <p>To have your data removed, email us at contact@vertranking.com and we will delete your account and athlete profile within 7 days.</p>
+        <p>To have your data removed, email us at mickskinner10@gmail.com and we will delete your account and athlete profile within 7 days.</p>
 
         <h2>Cookies</h2>
         <p>We use cookies only for authentication purposes to keep you logged in. We do not use tracking or advertising cookies.</p>
 
         <h2>Contact</h2>
-        <p>Questions? Email contact@vertranking.com</p>
+        <p>Questions? Email mickskinner10@gmail.com</p>
       </main>
 
       <footer style={{ borderTop: '1px solid #1e242c', padding: '24px', marginTop: '48px' }}>
