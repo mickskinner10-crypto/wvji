@@ -160,17 +160,19 @@ const filtered = athletes
           <button className="filter-btn" style={{ marginLeft: 'auto', borderColor: '#f5c842', color: '#f5c842' }}>★ Gold Verified Only</button>
         </div>
         
-        {countryFilter === 'USA' && (
-  <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
-    <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>State:</span>
-    <button onClick={() => setStateFilter('All')} className={`filter-btn ${stateFilter === 'All' ? 'active' : ''}`}>All</button>
-    {[...new Set(athletes.filter(a => a.country === 'USA' && a.state).map(a => a.state))].sort().map((s: any) => (
-      <button key={s} onClick={() => setStateFilter(s)} className={`filter-btn ${stateFilter === s ? 'active' : ''}`}>{s}</button>
-    ))}
-  </div>
-  <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
+       {countryFilter === 'USA' && (
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
+            <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>State:</span>
+            <button onClick={() => setStateFilter('All')} className={`filter-btn ${stateFilter === 'All' ? 'active' : ''}`}>All</button>
+            {[...new Set(athletes.filter(a => a.country === 'USA' && a.state).map(a => a.state))].sort().map((s: any) => (
+              <button key={s} onClick={() => setStateFilter(s)} className={`filter-btn ${stateFilter === s ? 'active' : ''}`}>{s}</button>
+            ))}
+          </div>
+        )}
+
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
           <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Height:</span>
-          {[['All', 'All'], ["Under 6'0", 'Under 72'], ["6'0–6'4", '72-76'], ["Over 6'4", 'Over 76']].map(([label, val]) => (
+          {[['All', 'All'], ["Under 6'0", 'Under 72'], ["6'0-6'4", '72-76'], ["Over 6'4", 'Over 76']].map(([label, val]) => (
             <button key={val} onClick={() => setHeightFilter(val)} className={`filter-btn ${heightFilter === val ? 'active' : ''}`}>{label}</button>
           ))}
         </div>
@@ -194,8 +196,6 @@ const filtered = athletes
           <button onClick={() => setAgeFilter('High School')} className={`filter-btn ${ageFilter === 'High School' ? 'active' : ''}`}>High School (18 & under)</button>
           <button onClick={() => setAgeFilter('Under 25')} className={`filter-btn ${ageFilter === 'Under 25' ? 'active' : ''}`}>Under 25</button>
         </div>
-)}
-
         <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
           {['Rank','Athlete', category === 'Pound-for-Pound' ? 'V/Weight' : 'Vertical','Height','Weight','Verified'].map(h => (
             <div key={h} style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: '#5a6470' }}>{h}</div>
