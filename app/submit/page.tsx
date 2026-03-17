@@ -8,7 +8,7 @@ const supabase = createClient(
 )
 
 export default function Submit() {
-  const [form, setForm] = useState({ name: '', country: '', sport: '', vertical: '', weight: '', height: '', standing_reach: '', state: '', video_url: '' })
+  const [form, setForm] = useState({ name: '', country: '', sport: '', vertical: '', weight: '', height: '', standing_reach: '', state: '', video_url: '', birth_year: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -48,7 +48,8 @@ export default function Submit() {
   standing_reach: form.standing_reach ? parseFloat(form.standing_reach) : null,
   state: form.state || null,
   video_url: form.video_url || null,
-  verified: 'Pending'
+  verified: 'Pending',
+  birth_year: form.birth_year ? parseInt(form.birth_year) : null,
 }])
     setLoading(false)
     setSubmitted(true)
@@ -114,6 +115,15 @@ export default function Submit() {
             <option>Dunker</option>
             <option>Football</option>
             <option>Other</option>
+          </select>
+        </div>
+        <div style={{ marginBottom: "20px" }}>
+          <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>Birth Year (optional)</label>
+          <select name="birth_year" onChange={handle} style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }}>
+            <option value="">Select birth year</option>
+            {Array.from({ length: 40 }, (_, i) => 2010 - i).map(y => (
+              <option key={y} value={y}>{y}</option>
+            ))}
           </select>
         </div>
 {parseFloat(form.vertical) >= 40 && !form.video_url && (
