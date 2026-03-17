@@ -45,7 +45,7 @@ export default function Terms() {
         <p>Vert Ranking is provided as-is. We make no guarantees about uptime, accuracy of rankings, or verification decisions.</p>
 
         <h2>Contact</h2>
-        <p>Questions? Email contact@vertranking.com</p>
+        <p>Questions? Email mickskinner10@gmail.com</p>
       </main>
 
       <footer style={{ borderTop: '1px solid #1e242c', padding: '24px', marginTop: '48px' }}>
