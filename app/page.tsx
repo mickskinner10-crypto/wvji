@@ -279,6 +279,7 @@ const filtered = athletes
   <span style={{ fontSize: '11px', color: '#5a6470' }}>vertranking.com · Est. 2026</span>
   <a href="/privacy" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>Privacy Policy</a>
   <a href="/terms" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>Terms of Service</a>
+  <a href="/contact" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>Contact</a>
 </div>
         </div>
       </footer>
