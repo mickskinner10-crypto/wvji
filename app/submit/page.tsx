@@ -121,7 +121,7 @@ export default function Submit() {
           <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>Birth Year (optional)</label>
           <select name="birth_year" onChange={handle} style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }}>
             <option value="">Select birth year</option>
-            {Array.from({ length: 40 }, (_, i) => 2010 - i).map(y => (
+            {Array.from({ length: 56 }, (_, i) => 2026 - i).map(y => (
               <option key={y} value={y}>{y}</option>
             ))}
           </select>
