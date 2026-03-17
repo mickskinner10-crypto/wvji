@@ -14,13 +14,27 @@ const [countryFilter, setCountryFilter] = useState('All')
 const [sportFilter, setSportFilter] = useState('All Sports')
   const [category, setCategory] = useState('Overall')
   const [stateFilter, setStateFilter] = useState('All')
+  const [heightFilter, setHeightFilter] = useState('All')
+const [weightFilter, setWeightFilter] = useState('All')
+const [verifiedFilter, setVerifiedFilter] = useState('All')
+const [ageFilter, setAgeFilter] = useState('All')
 
 const filtered = athletes
   .filter(a => {
     const countryMatch = countryFilter === 'All' || a.country?.includes(countryFilter)
     const sportMatch = sportFilter === 'All Sports' || a.sport === sportFilter
     const stateMatch = stateFilter === 'All' || a.state === stateFilter
-    return countryMatch && sportMatch && stateMatch
+    const heightMatch = heightFilter === 'All' ||
+      (heightFilter === 'Under 72' && parseFloat(a.height) < 72) ||
+      (heightFilter === '72-76' && parseFloat(a.height) >= 72 && parseFloat(a.height) <= 76) ||
+      (heightFilter === 'Over 76' && parseFloat(a.height) > 76)
+    const weightMatch = weightFilter === 'All' || (weightFilter === 'Over 200' && parseFloat(a.weight) > 200)
+    const verifiedMatch = verifiedFilter === 'All' || a.verified === verifiedFilter
+    const currentYear = new Date().getFullYear()
+    const ageMatch = ageFilter === 'All' ||
+      (ageFilter === 'High School' && a.birth_year && (currentYear - a.birth_year) <= 18) ||
+      (ageFilter === 'Under 25' && a.birth_year && (currentYear - a.birth_year) < 25)
+    return countryMatch && sportMatch && stateMatch && heightMatch && weightMatch && verifiedMatch && ageMatch
   })
   .map(a => ({
     ...a,
@@ -154,6 +168,32 @@ const filtered = athletes
       <button key={s} onClick={() => setStateFilter(s)} className={`filter-btn ${stateFilter === s ? 'active' : ''}`}>{s}</button>
     ))}
   </div>
+  <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
+          <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Height:</span>
+          {[['All', 'All'], ["Under 6'0", 'Under 72'], ["6'0–6'4", '72-76'], ["Over 6'4", 'Over 76']].map(([label, val]) => (
+            <button key={val} onClick={() => setHeightFilter(val)} className={`filter-btn ${heightFilter === val ? 'active' : ''}`}>{label}</button>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
+          <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Weight:</span>
+          <button onClick={() => setWeightFilter('All')} className={`filter-btn ${weightFilter === 'All' ? 'active' : ''}`}>All</button>
+          <button onClick={() => setWeightFilter('Over 200')} className={`filter-btn ${weightFilter === 'Over 200' ? 'active' : ''}`}>Over 200 lbs</button>
+        </div>
+
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
+          <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Verified:</span>
+          {['All', 'Gold', 'Silver', 'Pending'].map(v => (
+            <button key={v} onClick={() => setVerifiedFilter(v)} className={`filter-btn ${verifiedFilter === v ? 'active' : ''}`}>{v}</button>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const, alignItems: 'center' }}>
+          <span style={{ fontSize: '10px', color: '#5a6470', letterSpacing: '1.5px', textTransform: 'uppercase', marginRight: '8px' }}>Age:</span>
+          <button onClick={() => setAgeFilter('All')} className={`filter-btn ${ageFilter === 'All' ? 'active' : ''}`}>All</button>
+          <button onClick={() => setAgeFilter('High School')} className={`filter-btn ${ageFilter === 'High School' ? 'active' : ''}`}>High School (18 & under)</button>
+          <button onClick={() => setAgeFilter('Under 25')} className={`filter-btn ${ageFilter === 'Under 25' ? 'active' : ''}`}>Under 25</button>
+        </div>
 )}
 
         <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
