@@ -20,25 +20,25 @@ export default function Contact() {
           <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
             <div style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: '#3df5b0' }}>General Inquiries</div>
             <p>Questions about Vert Ranking, partnerships, or anything else.</p>
-            <a href="mailto:contact@vertranking.com" style={{ display: 'inline-block', marginTop: '12px', color: '#3df5b0', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>contact@vertranking.com</a>
+            <a href="mailto:mickskinner10@gmail.com" style={{ display: 'inline-block', marginTop: '12px', color: '#3df5b0', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>mickskinner10@gmail.com</a>
           </div>
 
           <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
             <div style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: '#f5c842' }}>Verification Questions</div>
             <p>Want to get your jump verified? Need help understanding the Gold or Silver tier requirements? Reach out and we'll walk you through it.</p>
-            <a href="mailto:verify@vertranking.com" style={{ display: 'inline-block', marginTop: '12px', color: '#3df5b0', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>verify@vertranking.com</a>
+            <a href="mailto:mickskinner10@gmail.com" style={{ display: 'inline-block', marginTop: '12px', color: '#3df5b0', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>mickskinner10@gmail.com</a>
           </div>
 
           <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
             <div style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: '#9bb0c7' }}>Report a Submission</div>
             <p>Think a jump is fake or exaggerated? Send us the athlete name and your reason and we will review it.</p>
-            <a href="mailto:report@vertranking.com" style={{ display: 'inline-block', marginTop: '12px', color: '#3df5b0', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>report@vertranking.com</a>
+            <a href="mailto:mickskinner10@gmail.com" style={{ display: 'inline-block', marginTop: '12px', color: '#3df5b0', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>mickskinner10@gmail.com</a>
           </div>
 
           <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
             <div style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: '#5a6470' }}>Data Removal</div>
             <p>Want your profile or data removed? Email us and we will delete it within 7 days.</p>
-            <a href="mailto:contact@vertranking.com" style={{ display: 'inline-block', marginTop: '12px', color: '#3df5b0', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>contact@vertranking.com</a>
+            <a href="mailto:mickskinner10@gmail.com" style={{ display: 'inline-block', marginTop: '12px', color: '#3df5b0', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>mickskinner10@gmail.com</a>
           </div>
 
         </div>
