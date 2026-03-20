@@ -10,6 +10,8 @@ const supabase = createClient(
 export default function Home() {
   const [athletes, setAthletes] = useState<any[]>([]) 
   const [user, setUser] = useState<any>(null)
+  const [weeklyTop, setWeeklyTop] = useState<any[]>([])
+const [monthlyTop, setMonthlyTop] = useState<any[]>([])
 const [countryFilter, setCountryFilter] = useState('All')
 const [sportFilter, setSportFilter] = useState('All Sports')
   const [category, setCategory] = useState('Overall')
@@ -55,6 +57,13 @@ const filtered = athletes
   })
   useEffect(() => {
     supabase.from('athletes').select('*').order('vertical', { ascending: false }).then(({ data }) => { if (data) setAthletes(data) })
+
+    const now = new Date()
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString()
+    const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString()
+
+    supabase.from('athletes').select('*').gte('created_at', weekAgo).order('vertical', { ascending: false }).limit(5).then(({ data }) => { if (data) setWeeklyTop(data) })
+    supabase.from('athletes').select('*').gte('created_at', monthAgo).order('vertical', { ascending: false }).limit(5).then(({ data }) => { if (data) setMonthlyTop(data) })
     supabase.auth.getUser().then(({ data }) => { if (data.user) setUser(data.user) })
   }, [])
 
@@ -230,7 +239,45 @@ const filtered = athletes
             </div>
           </div>
         ))}
+{(weeklyTop.length > 0 || monthlyTop.length > 0) && (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '48px' }}>
+            <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
+              <div style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '2px', marginBottom: '4px', paddingBottom: '12px', borderBottom: '1px solid #1e242c' }}>🔥 Top 5 This Week</div>
+              {weeklyTop.length === 0 ? (
+                <div style={{ fontSize: '13px', color: '#5a6470', paddingTop: '12px' }}>No submissions this week yet.</div>
+              ) : weeklyTop.map((a, i) => (
+                <div key={a.id} onClick={() => window.location.href = `/athlete?id=${a.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #1e242c', cursor: 'pointer' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <span style={{ fontSize: '16px', fontWeight: '900', color: i === 0 ? '#f5c842' : i === 1 ? '#9bb0c7' : i === 2 ? '#c97b42' : '#5a6470', minWidth: '20px' }}>#{i+1}</span>
+                    <div>
+                      <div style={{ fontSize: '13px', fontWeight: '500' }}>{a.name}</div>
+                      <div style={{ fontSize: '11px', color: '#5a6470' }}>{a.country} · {a.sport}</div>
+                    </div>
+                  </div>
+                  <div style={{ fontSize: '20px', fontWeight: '900', color: '#3df5b0' }}>{a.vertical}"</div>
+                </div>
+              ))}
+            </div>
 
+            <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
+              <div style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '2px', marginBottom: '4px', paddingBottom: '12px', borderBottom: '1px solid #1e242c' }}>📅 Top 5 This Month</div>
+              {monthlyTop.length === 0 ? (
+                <div style={{ fontSize: '13px', color: '#5a6470', paddingTop: '12px' }}>No submissions this month yet.</div>
+              ) : monthlyTop.map((a, i) => (
+                <div key={a.id} onClick={() => window.location.href = `/athlete?id=${a.id}`} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #1e242c', cursor: 'pointer' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <span style={{ fontSize: '16px', fontWeight: '900', color: i === 0 ? '#f5c842' : i === 1 ? '#9bb0c7' : i === 2 ? '#c97b42' : '#5a6470', minWidth: '20px' }}>#{i+1}</span>
+                    <div>
+                      <div style={{ fontSize: '13px', fontWeight: '500' }}>{a.name}</div>
+                      <div style={{ fontSize: '11px', color: '#5a6470' }}>{a.country} · {a.sport}</div>
+                    </div>
+                  </div>
+                  <div style={{ fontSize: '20px', fontWeight: '900', color: '#3df5b0' }}>{a.vertical}"</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '48px' }}>
           <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
             <div style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '2px', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #1e242c' }}>Verification Tiers</div>
