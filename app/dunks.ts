@@ -26,9 +26,11 @@ export interface Dunk {
 }
 
 export const DUNKS: Dunk[] = [
+  // Beginner
   { name: 'One Hander', tier: 'Beginner' },
   { name: 'Two Hander', tier: 'Beginner' },
   { name: 'Off Glass', tier: 'Beginner' },
+  // Intermediate
   { name: 'Back Scratcher', tier: 'Intermediate' },
   { name: '360', tier: 'Intermediate' },
   { name: 'Windmill', tier: 'Intermediate' },
@@ -36,6 +38,7 @@ export const DUNKS: Dunk[] = [
   { name: 'Reverse 1 hand', tier: 'Intermediate' },
   { name: 'Transfer', tier: 'Intermediate' },
   { name: 'D tap', tier: 'Intermediate' },
+  // Advanced
   { name: 'Reverse Pump', tier: 'Advanced' },
   { name: 'Eastbay', tier: 'Advanced' },
   { name: 'Behind the back', tier: 'Advanced' },
@@ -55,6 +58,7 @@ export const DUNKS: Dunk[] = [
   { name: 'D tap reverse', tier: 'Advanced' },
   { name: 'Double d tap', tier: 'Advanced' },
   { name: '360 scoop', tier: 'Advanced' },
+  // Expert
   { name: 'Honey-Dip', tier: 'Expert' },
   { name: 'Thrunk', tier: 'Expert' },
   { name: '360 Windmill', tier: 'Expert' },
@@ -80,7 +84,8 @@ export const DUNKS: Dunk[] = [
   { name: 'Volleyball spike', tier: 'Expert' },
   { name: 'Double back scratcher', tier: 'Expert' },
   { name: '180 Crystal ball', tier: 'Expert' },
-  { name: 'Eastbay where you bounce it and only use one hand', tier: 'Expert' },
+  { name: 'Eastbay bounce one hand', tier: 'Expert' },
+  // Legendary
   { name: 'Underboth', tier: 'Legendary' },
   { name: 'Double Honey Dip', tier: 'Legendary' },
   { name: 'Push-off Crown', tier: 'Legendary' },
@@ -105,17 +110,12 @@ export const DUNKS: Dunk[] = [
   { name: 'Double pump reverse', tier: 'Legendary' },
   { name: 'Crystal ball touch back of head reverse', tier: 'Legendary' },
   { name: 'Backscratcher happy feet', tier: 'Legendary' },
-  { name: 'Kamikaze', tier: 'Godly' },
+  // Mythic
   { name: 'Backscratcher Eastbay', tier: 'Mythic' },
-  { name: '360 Double Eastbay', tier: 'Godly' },
   { name: '360 eastbay 2 hand finish', tier: 'Mythic' },
-  { name: 'Eastbay Btb', tier: 'Godly' },
   { name: 'Eastbay btb pushoff', tier: 'Mythic' },
-  { name: 'Hide and seek', tier: 'Godly' },
   { name: 'Lost and Found', tier: 'Mythic' },
-  { name: 'Jonathans wall', tier: 'Godly' },
   { name: 'Jusfly round off dunk', tier: 'Mythic' },
-  { name: 'Jusfly Round off dunk eastbay', tier: 'Godly' },
   { name: '360 happy feet', tier: 'Mythic' },
   { name: 'Backscratcher double elbow', tier: 'Mythic' },
   { name: 'Upside down dunk', tier: 'Mythic' },
@@ -124,17 +124,21 @@ export const DUNKS: Dunk[] = [
   { name: '360 Windmill Elbow', tier: 'Mythic' },
   { name: 'Butterfly effect', tier: 'Mythic' },
   { name: '180 Snake', tier: 'Mythic' },
-  { name: 'Back Flip Eastbay', tier: 'Godly' },
   { name: '360 eastbay off glass', tier: 'Mythic' },
-  { name: 'Off vert 360 eastbay', tier: 'Godly' },
   { name: 'Eastbay Elbow', tier: 'Mythic' },
   { name: 'Eastbay Scorpion', tier: 'Mythic' },
   { name: 'Btb Elbow', tier: 'Mythic' },
   { name: 'Underboth scorpion', tier: 'Mythic' },
-  { name: '360 Double elbow', tier: 'Mythic' },
   { name: 'Crown', tier: 'Mythic' },
   { name: '540', tier: 'Mythic' },
-  { name: 'Eastbay btb pushoff', tier: 'Mythic' },
-  { name: 'Double Transfer', tier: 'Advanced' },
+  // Godly
+  { name: 'Kamikaze', tier: 'Godly' },
+  { name: '360 Double Eastbay', tier: 'Godly' },
+  { name: 'Eastbay Btb', tier: 'Godly' },
+  { name: 'Hide and seek', tier: 'Godly' },
+  { name: 'Jonathans wall', tier: 'Godly' },
+  { name: 'Jusfly Round off dunk eastbay', tier: 'Godly' },
+  { name: 'Back Flip Eastbay', tier: 'Godly' },
+  { name: 'Off vert 360 eastbay', tier: 'Godly' },
   { name: '720', tier: 'Godly' },
 ]
