@@ -2,7 +2,7 @@
 import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { createClient } from '@supabase/supabase-js'
-
+import { DUNKS, TIER_POINTS, TIER_COLORS, DunkTier } from '../dunks'
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -21,6 +21,9 @@ function AthleteContent() {
   const [editForm, setEditForm] = useState<any>({})
   const [editVideo, setEditVideo] = useState('')
   const [saving, setSaving] = useState(false)
+  const [completedDunks, setCompletedDunks] = useState<string[]>([])
+  const [dunkScore, setDunkScore] = useState(0)
+  const [activeTier, setActiveTier] = useState<DunkTier | 'All'>('All')
 
   useEffect(() => {
     if (!id) return
@@ -38,6 +41,20 @@ function AthleteContent() {
     }
     load()
     supabase.auth.getUser().then(({ data }) => { if (data.user) setUser(data.user) })
+
+    if (id) {
+      supabase.from('dunks').select('dunk_name').eq('athlete_id', id).then(({ data }) => {
+        if (data) {
+          const names = data.map((d: any) => d.dunk_name)
+          setCompletedDunks(names)
+          const score = names.reduce((total: number, name: string) => {
+            const dunk = DUNKS.find(d => d.name === name)
+            return total + (dunk ? TIER_POINTS[dunk.tier] : 0)
+          }, 0)
+          setDunkScore(score)
+        }
+      })
+    }
   }, [id])
 
   const verifiedColor = (v: string) => v === 'Gold' ? '#f5c842' : v === 'Silver' ? '#9bb0c7' : '#5a6470'
@@ -208,6 +225,57 @@ function AthleteContent() {
           </div>
         )}
 
+        <div style={{ marginTop: '48px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', paddingBottom: '12px', borderBottom: '1px solid #1e242c' }}>
+            <div>
+              <div style={{ fontSize: '22px', fontWeight: '900', letterSpacing: '2px' }}>Dunk Checklist</div>
+              <div style={{ fontSize: '13px', color: '#5a6470', marginTop: '4px' }}>Dunk Score: <span style={{ color: '#3df5b0', fontWeight: '700' }}>{dunkScore} pts</span> · {completedDunks.length} dunks completed</div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' as const }}>
+            {(['All', 'Beginner', 'Intermediate', 'Advanced', 'Expert', 'Legendary', 'Mythic', 'Godly'] as const).map(tier => (
+              <button key={tier} onClick={() => setActiveTier(tier)} style={{ background: activeTier === tier ? (tier === 'All' ? '#3df5b0' : TIER_COLORS[tier as DunkTier]) : 'transparent', border: `1px solid ${tier === 'All' ? '#3df5b0' : TIER_COLORS[tier as DunkTier]}`, color: activeTier === tier ? '#000' : (tier === 'All' ? '#3df5b0' : TIER_COLORS[tier as DunkTier]), padding: '4px 12px', fontSize: '11px', letterSpacing: '1px', cursor: 'pointer', textTransform: 'uppercase' as const }}>{tier}</button>
+            ))}
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '8px' }}>
+            {DUNKS.filter(d => activeTier === 'All' || d.tier === activeTier).map(dunk => {
+              const completed = completedDunks.includes(dunk.name)
+              const isOwner = athlete?.user_id && user?.id === athlete.user_id
+              return (
+                <div key={dunk.name} onClick={async () => {
+                  if (!isOwner) return
+                  if (completed) {
+                    await supabase.from('dunks').delete().eq('athlete_id', id).eq('dunk_name', dunk.name)
+                    const newCompleted = completedDunks.filter(n => n !== dunk.name)
+                    setCompletedDunks(newCompleted)
+                    setDunkScore(newCompleted.reduce((t, n) => {
+                      const d = DUNKS.find(x => x.name === n)
+                      return t + (d ? TIER_POINTS[d.tier] : 0)
+                    }, 0))
+                  } else {
+                    await supabase.from('dunks').insert([{ athlete_id: parseInt(id!), dunk_name: dunk.name }])
+                    const newCompleted = [...completedDunks, dunk.name]
+                    setCompletedDunks(newCompleted)
+                    setDunkScore(newCompleted.reduce((t, n) => {
+                      const d = DUNKS.find(x => x.name === n)
+                      return t + (d ? TIER_POINTS[d.tier] : 0)
+                    }, 0))
+                  }
+                }} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 14px', background: completed ? 'rgba(61,245,176,0.06)' : '#0f1318', border: `1px solid ${completed ? '#3df5b0' : '#1e242c'}`, cursor: isOwner ? 'pointer' : 'default', transition: 'all 0.15s' }}>
+                  <div style={{ width: '16px', height: '16px', border: `2px solid ${completed ? '#3df5b0' : '#1e242c'}`, borderRadius: '2px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    {completed && <div style={{ width: '8px', height: '8px', background: '#3df5b0', borderRadius: '1px' }}></div>}
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: '12px', fontWeight: '500', color: completed ? '#e8edf3' : '#9aa3ad', whiteSpace: 'nowrap' as const, overflow: 'hidden', textOverflow: 'ellipsis' }}>{dunk.name}</div>
+                    <div style={{ fontSize: '10px', color: TIER_COLORS[dunk.tier], letterSpacing: '1px', textTransform: 'uppercase' as const }}>{dunk.tier} · {TIER_POINTS[dunk.tier]}pts</div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
         <div style={{ marginTop: '32px', border: '1px solid #1a8a5f', background: 'rgba(61,245,176,0.03)', padding: '24px', textAlign: 'center' }}>
           <div style={{ fontSize: '15px', fontWeight: '500', marginBottom: '8px' }}>Think you can beat {athlete.name.split(' ')[0]}?</div>
           <p style={{ fontSize: '13px', color: '#5a6470', marginBottom: '16px' }}>Submit your jump and get ranked globally.</p>
