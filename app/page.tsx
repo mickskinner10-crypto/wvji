@@ -313,6 +313,7 @@ const filtered = athletes
           <div style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '3px', color: '#5a6470' }}>VERT RANKING</div>
           <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
   <span style={{ fontSize: '11px', color: '#5a6470' }}>vertranking.com · Est. 2026</span>
+  <a href="/about" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>About</a>
   <a href="/privacy" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>Privacy Policy</a>
   <a href="/terms" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>Terms of Service</a>
   <a href="/contact" style={{ fontSize: '11px', color: '#5a6470', textDecoration: 'none' }}>Contact</a>
