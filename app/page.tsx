@@ -140,8 +140,8 @@ const filtered = athletes
           </div>
         </section>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px', margin: '0 0 36px' }}>
-          {[['⚡','Overall','Raw vertical — the highest measured leap in the world'],['⚖️','Pound-for-Pound','Vertical relative to bodyweight — true explosive power'],['🏋️','Weight Classes','Compete within your weight division, like combat sports'],['🦶','Standing Vert','No approach — pure lower body power from standstill']].map(([icon, title, desc]) => (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '12px', margin: '0 0 36px' }}>
+          {[['⚡','Overall','Raw vertical — the highest measured leap in the world'],['⚖️','Pound-for-Pound','Vertical relative to bodyweight — true explosive power'],['🦶','Standing Vert','No approach — pure lower body power from standstill']].map(([icon, title, desc]) => (
             <div key={title} onClick={() => setCategory(title as string)} className={`cat-card ${category === title ? 'active' : ''}`}>
               <div style={{ fontSize: '22px', marginBottom: '10px' }}>{icon}</div>
               <div style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '1.5px', marginBottom: '4px' }}>{title}</div>
