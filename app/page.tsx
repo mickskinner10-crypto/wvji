@@ -278,7 +278,7 @@ const filtered = athletes
             </div>
           </div>
         )}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '48px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px', marginTop: '48px' }}>
           <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
             <div style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '2px', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #1e242c' }}>Verification Tiers</div>
             {[['🥇 Gold — Certified','','#f5c842','Gold'],['🥈 Silver — Video Evidence','','#9bb0c7','Silver'],['⬜ Self-Reported','','#5a6470','Pending']].map(([name, proof, color, badge]) => (
@@ -295,18 +295,7 @@ const filtered = athletes
             ))}
           </div>
 
-          <div style={{ border: '1px solid #1e242c', background: '#0f1318', padding: '24px' }}>
-            <div style={{ fontSize: '18px', fontWeight: '900', letterSpacing: '2px', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #1e242c' }}>Weight Class Leaders</div>
-            {[['Under 150 lb','—','—'],['150–180 lb','—','—'],['180–210 lb','—','—'],['210+ lb','—','—']].map(([cls, name, jump]) => (
-              <div key={cls} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: '1px solid #1e242c' }}>
-                <div>
-                  <div style={{ fontSize: '12px', color: '#5a6470' }}>{cls}</div>
-                  <div style={{ fontSize: '13px', fontWeight: '500' }}>{name}</div>
-                </div>
-                <div style={{ fontSize: '20px', fontWeight: '900', color: '#3df5b0' }}>{jump}</div>
-              </div>
-            ))}
-          </div>
+          
         </div>
 
         <div style={{ margin: '48px 0', border: '1px solid #1a8a5f', padding: '36px', background: 'rgba(61,245,176,0.03)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' as const, gap: '24px' }}>
