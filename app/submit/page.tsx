@@ -8,7 +8,7 @@ const supabase = createClient(
 )
 
 export default function Submit() {
-  const [form, setForm] = useState({ name: '', country: '', sport: '', vertical: '', weight: '', height: '', standing_reach: '', state: '', video_url: '', birth_year: '' })
+  const [form, setForm] = useState({ name: '', country: '', sport: '', vertical: '', weight: '', height: '', standing_reach: '', state: '', video_url: '', birth_year: '', standing_vert: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -50,6 +50,7 @@ export default function Submit() {
   video_url: form.video_url || null,
   verified: 'Pending',
   birth_year: form.birth_year ? parseInt(form.birth_year) : null,
+  standing_vert: form.standing_vert ? parseFloat(form.standing_vert) : null,
 }])
     setLoading(false)
     setSubmitted(true)
@@ -96,12 +97,12 @@ export default function Submit() {
   </div>
 )}
 
-{["height","standing_reach","vertical","weight"].map(field => (
+{["height","standing_reach","vertical","standing_vert","weight"].map(field => (
   <div key={field} style={{ marginBottom: "20px" }}>
     <label style={{ display: "block", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: "#5a6470", marginBottom: "8px" }}>
-      {field === 'height' ? 'Height (inches)' : field === 'standing_reach' ? 'Standing Reach (inches)' : field === 'vertical' ? 'Vertical Jump (inches)' : 'Body Weight (lbs)'}
+      {field === 'height' ? 'Height (inches)' : field === 'standing_reach' ? 'Standing Reach (inches)' : field === 'vertical' ? 'Running Vertical (inches)' : field === 'standing_vert' ? 'Standing Vertical (inches) (optional)' : 'Body Weight (lbs)'}
     </label>
-    <input name={field} placeholder={field === 'height' ? 'e.g. 72 (6 feet = 72 inches)' : field === 'standing_reach' ? 'e.g. 90' : field === 'vertical' ? 'e.g. 42.5' : 'e.g. 175'} onChange={handle} style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }} />
+    <input name={field} placeholder={field === 'height' ? 'e.g. 72 (6 feet = 72 inches)' : field === 'standing_reach' ? 'e.g. 90' : field === 'vertical' ? 'e.g. 42.5' : field === 'standing_vert' ? 'e.g. 30' : 'e.g. 175'} onChange={handle} style={{ width: "100%", background: "#0f1318", border: "1px solid #1e242c", color: "#e8edf3", padding: "12px 16px", fontSize: "15px", outline: "none" }} />
   </div>
 ))}
 
