@@ -45,13 +45,19 @@ const filtered = athletes
       : a.vertical,
     ppw: category === 'Pound-for-Pound' && a.weight
       ? parseFloat(a.vertical) * (parseFloat(a.weight) / 200)
-      : null
+      : null,
+    standingVert: a.standing_vert ? parseFloat(a.standing_vert) : null
   }))
   .sort((a, b) => {
     if (category === 'Pound-for-Pound') {
       if (!a.ppw) return 1
       if (!b.ppw) return -1
       return b.ppw - a.ppw
+    }
+    if (category === 'Standing Vert') {
+      if (!a.standingVert) return 1
+      if (!b.standingVert) return -1
+      return b.standingVert - a.standingVert
     }
     return parseFloat(b.vertical) - parseFloat(a.vertical)
   })
@@ -206,7 +212,7 @@ const filtered = athletes
           <button onClick={() => setAgeFilter('Under 25')} className={`filter-btn ${ageFilter === 'Under 25' ? 'active' : ''}`}>Under 25</button>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '60px 1fr 100px 100px 100px 100px', gap: '8px', padding: '8px 16px', background: '#0f1318', marginBottom: '4px' }}>
-          {['Rank','Athlete', category === 'Pound-for-Pound' ? 'V/Weight' : 'Vertical','Height','Weight','Verified'].map(h => (
+          {['Rank','Athlete', category === 'Pound-for-Pound' ? 'V/Weight' : category === 'Standing Vert' ? 'Standing' : 'Vertical','Height','Weight','Verified'].map(h => (
             <div key={h} style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: '#5a6470' }}>{h}</div>
           ))}
         </div>
@@ -228,8 +234,9 @@ const filtered = athletes
               </div>
             </div>
             <div style={{ fontSize: '24px', fontWeight: '900', color: rankColor(i+1), alignSelf: 'center' }}>
-  {category === 'Pound-for-Pound' ? a.displayValue : `${a.vertical}"`}
+  {category === 'Pound-for-Pound' ? a.displayValue : category === 'Standing Vert' ? (a.standingVert ? `${a.standingVert}"` : '—') : `${a.vertical}"`}
   {category === 'Pound-for-Pound' && <span style={{ fontSize: '11px', color: '#5a6470', display: 'block' }}>vert/lb</span>}
+  {category === 'Standing Vert' && <span style={{ fontSize: '11px', color: '#5a6470', display: 'block' }}>standing</span>}
 </div>
 <div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.height ? `${Math.floor(parseFloat(a.height)/12)}'${Math.round(parseFloat(a.height)%12)}"` : '—'}</div>
 <div style={{ alignSelf: 'center', fontSize: '13px', color: '#9bb0c7' }}>{a.weight} lb</div>
